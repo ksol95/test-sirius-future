@@ -1,0 +1,134 @@
+:root {
+  --text-color: #3a353e;
+
+  --progress-bar-color: #c7e4fc;
+  --progress-bar-value-color: #7abef8;
+  --container-radius: 20px;
+  --progress-height: 16px;
+
+  --alert-color: #e12828;
+  --alert-background-color: #fadee0;
+
+  --main-fs: 16px;
+  --small-fs: 0.875em;
+  --title-fs: 1.25em;
+  --small-radius: 8px;
+
+  --picture-input-bg: #f6f6f8;
+  --picture-input-button-bg: #daedfd;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  color: var(--text-color);
+  margin: 0;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+  font-size: var(--main-fs);
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  font-size: var(--title-fs);
+  font-weight: 700;
+}
+
+.alert {
+  font-size: var(--small-fs);
+  color: var(--alert-color);
+  background-color: var(--alert-background-color);
+  padding: 8px 12px;
+  border-radius: 100px;
+}
+.container {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--container-radius);
+
+  max-width: 904px;
+  padding: 4em;
+  padding-bottom: 2em;
+
+  background-color: #eee;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.progress-bar {
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  inline-size: 100%;
+  block-size: var(--progress-height);
+}
+
+.progress-bar::-webkit-progress-bar {
+  background-color: var(--progress-bar-color);
+}
+
+.progress-bar::-webkit-progress-value {
+  background-color: var(--progress-bar-value-color);
+}
+
+.load-picture {
+  display: flex;
+  flex-direction: row;
+  gap: 4em;
+  padding-bottom: 2em;
+}
+.load-picture__preview {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  gap: 0.5em;
+  align-items: center;
+}
+.load-picture__input {
+  flex: 0 1 auto;
+  inline-size: 216px;
+  block-size: 161px;
+  background-color: #f6f6f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--small-radius);
+}
+.load-picture__input::after {
+  content: "";
+  display: block;
+  block-size: 4em;
+  aspect-ratio: 1/1;
+  background-color: var(--picture-input-button-bg);
+  background-image: url(./assets/upload-picture.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: var(--small-radius);
+}
