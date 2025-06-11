@@ -1,0 +1,41 @@
+@font-face {
+  font-family: "CirceRounded";
+  src: url("../assets/fonts/CirceRounded-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CirceRounded";
+  src: url("../assets/fonts/CirceRounded-Bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CirceRounded";
+  src: url("../assets/fonts/CirceRounded-ExtraBold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CirceRounded";
+  src: url("../assets/fonts/CirceRounded-ExtraLight.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CirceRounded";
+  src: url("../assets/fonts/CirceRounded-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CirceRounded";
+  src: url("../assets/fonts/CirceRounded-Thin.otf") format("opentype");
+  font-weight: 100;
+  font-style: normal;
+}

@@ -1,65 +1,75 @@
-// import "./App.css";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "./store/store";
+import { setFile } from "./store/slice/fileUploadSlice";
+import { nextStep, prevStep } from "./store/slice/stepsSlice";
+import { LoadPicture } from "./components/LoadPicture";
+import { QuestionForm } from "./components/QuestionForm";
+import { StepInfo } from "./components/StepInfo";
 
 function App() {
-  const [step, setStep] = useState(1);
+  const label = [
+    "Дом, дерево, человек",
+    "Несуществующее животное",
+    "Автопортрет",
+  ];
+  const dispatch = useDispatch();
+  const currentStep = useSelector(
+    (state: RootState) => state.steps.currentStep
+  );
+  const files = useSelector((state: RootState) => state.fileUpload.files);
+
+  const allFilesUploaded = files.every((file) => file !== null);
+
+  const handleFileChange = (file: File | null, index: number) => {
+    dispatch(setFile({ index, file }));
+  };
+
+  const goToNextStep = () => {
+    if (currentStep === 1 && !allFilesUploaded) return;
+    dispatch(nextStep());
+  };
+  const goBack = () => {
+    dispatch(prevStep());
+  };
+
   return (
-    <div className="container">
-      <progress className="progress-bar" value={step} max="3"></progress>
-      {/* <WelcomePage testName="Название" /> */}
-      <LoadPicture />
+    <div className="page">
+      <main className="container">
+        <progress
+          className="progress-bar"
+          value={currentStep}
+          max="3"
+        ></progress>
+
+        {currentStep === 1 && (
+          <LoadPicture
+            onFileChange={handleFileChange}
+            files={files}
+            label={label}
+          />
+        )}
+        {currentStep === 2 && <QuestionForm />}
+
+        <footer className="footer">
+          <StepInfo currentStep={currentStep} steps={3} />
+          <div className="footer__buttons-bar">
+            {currentStep > 1 && (
+              <button className="btn secondary arrow-back" onClick={goBack}>
+                К загрузке рисунков
+              </button>
+            )}
+            <button
+              className="btn primary arrow-icon"
+              disabled={currentStep === 1 && !allFilesUploaded}
+              onClick={goToNextStep}
+            >
+              Далее
+            </button>
+          </div>
+        </footer>
+      </main>
     </div>
   );
 }
 
 export default App;
-
-export const WelcomePage = ({
-  testName = "Название теста",
-}: {
-  testName: string;
-}) => <h1>{testName}</h1>;
-
-export const LoadPicture = () => (
-  <div className="content">
-    <div className="heading">
-      <h2 className="title">Загрузите фотографии рисунков </h2>
-      <span className="alert">
-        Допустимые форматы файлов: jpg, jpeg, png, pdf. Размер не более 5 Мб
-      </span>
-    </div>
-
-    <form className="load-picture" action="">
-      <div className="load-picture__preview">
-        <label className="load-picture__input">
-          <input type="file" hidden />
-        </label>
-        <span className="load-picture__caption">Дом, дерево, человек</span>
-      </div>
-      <div className="load-picture__preview">
-        <label className="load-picture__input">
-          <input type="file" hidden />
-        </label>
-        <span className="load-picture__caption">Несуществующее животное</span>
-      </div>
-      <div className="load-picture__preview">
-        <label className="load-picture__input">
-          <input type="file" hidden />
-        </label>
-        <span className="load-picture__caption">Автопортрет</span>
-      </div>
-    </form>
-  </div>
-);
-
-export const StepInfo = ({
-  currentStep = 0,
-  steps = 0,
-}: {
-  currentStep: number;
-  steps: number;
-}) => (
-  <p>
-    Шаг {currentStep}/{steps}
-  </p>
-);
